@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+  <!-- HDFS -->
+  <property>
+    <name>dfs.namenode.http-address</name>
+    <value>bigdata-01.dcs.gla.ac.uk:50070</value>
+  </property>
+  <property>
+    <name>dfs.namenode.servicerpc-address</name>
+    <value>bigdata-01.dcs.gla.ac.uk:8022</value>
+  </property>
+  <property>
+    <name>fs.defaultFS</name>
+    <value>hdfs://bigdata-01.dcs.gla.ac.uk:8020</value>
+  </property>
+  <property>
+    <name>fs.permissions.umask-mode</name>
+    <value>022</value>
+  </property>
+
+  <!-- HBase -->
+  <property>
+    <name>hbase.rootdir</name>
+    <value>hdfs://bigdata-01.dcs.gla.ac.uk:8020/hbase</value>
+  </property>
+  <property>
+    <name>hbase.client.scanner.caching</name>
+    <value>100</value>
+  </property>
+  <property>
+    <name>hbase.zookeeper.quorum</name>
+    <value>bigdata-01.dcs.gla.ac.uk,bigdata-04.dcs.gla.ac.uk,bigdata-05.dcs.gla.ac.uk,bigdata-02.dcs.gla.ac.uk,bigdata-03.dcs.gla.ac.uk</value>
+  </property>
+  <property>
+    <name>hbase.zookeeper.property.clientPort</name>
+    <value>2181</value>
+  </property>
+
+  <!-- MapReduce -->
+  <property>
+    <name>mapred.job.tracker</name>
+    <value>bigdata-01.dcs.gla.ac.uk:8021</value>
+  </property>
+  <property>
+    <name>mapred.job.tracker.http.address</name>
+    <value>bigdata-01.dcs.gla.ac.uk:50030</value>
+  </property>
+  <property>
+    <name>mapred.output.compress</name>
+    <value>true</value>
+  </property>
+  <property>
+    <name>mapred.output.compression.type</name>
+    <value>BLOCK</value>
+  </property>
+  <property>
+    <name>mapred.output.compression.codec</name>
+    <value>org.apache.hadoop.io.compress.SnappyCodec</value>
+  </property>
+  <property>
+    <name>mapred.map.output.compression.codec</name>
+    <value>org.apache.hadoop.io.compress.SnappyCodec</value>
+  </property>
+  <property>
+    <name>mapred.compress.map.output</name>
+    <value>true</value>
+  </property>
+</configuration>
