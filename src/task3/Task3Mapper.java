@@ -7,7 +7,7 @@ import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
-public class Task3Mapper extends Mapper<LongWritable, Text, LongWritable, Text> {
+public class Task3Mapper extends Mapper<LongWritable, Text, RevDatePair, Text> {
 	
 	@Override
 	public void map(LongWritable key, Text value, Context context)
@@ -21,7 +21,7 @@ public class Task3Mapper extends Mapper<LongWritable, Text, LongWritable, Text> 
 				long revId = Long.parseLong(tokenizer.nextToken());
 				tokenizer.nextToken();
 				String date = tokenizer.nextToken();
-				context.write(new LongWritable(articleId), new Text(revId + " " + date));
+				context.write(new RevDatePair(articleId, date), new Text(revId + " " + date));
 			}
 		}
 	}

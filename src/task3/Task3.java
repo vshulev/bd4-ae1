@@ -23,10 +23,16 @@ public class Task3 {
 		job.setInputFormatClass(TextInputFormat.class);
 		job.setMapperClass(Task3Mapper.class);
 		job.setReducerClass(Task3Reducer.class);
-		job.setMapOutputKeyClass(LongWritable.class);
+		job.setMapOutputKeyClass(RevDatePair.class);
 		job.setMapOutputValueClass(Text.class);
 		job.setOutputKeyClass(LongWritable.class);
 		job.setOutputValueClass(Text.class);
+
+		job.setPartitionerClass(Task3Partitioner.class);
+		job.setGroupingComparatorClass(Task3GroupingComparator.class);
+		job.setSortComparatorClass(RevDatePairComparator.class);
+		
+		
 		FileInputFormat.addInputPath(job, new Path(args[0]));
 		FileOutputFormat.setOutputPath(job, new Path(args[1]));
 		job.submit();
