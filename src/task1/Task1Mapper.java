@@ -7,7 +7,7 @@ import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
-public class Task1Mapper extends Mapper<LongWritable, Text, LongWritable, LongWritable> {
+public class Task1Mapper extends Mapper<LongWritable, Text, ArticleRevPair, LongWritable> {
 
 	@Override
 	public void map(LongWritable key, Text value, Context context)
@@ -19,7 +19,7 @@ public class Task1Mapper extends Mapper<LongWritable, Text, LongWritable, LongWr
 			if(word.equals("REVISION")) {
 				long articleId = Long.parseLong(tokenizer.nextToken());
 				long revId = Long.parseLong(tokenizer.nextToken());
-				context.write(new LongWritable(articleId), new LongWritable(revId));
+				context.write(new ArticleRevPair(articleId, revId), new LongWritable(revId));
 			}
 		}
 	}

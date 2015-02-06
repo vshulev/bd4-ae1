@@ -6,11 +6,10 @@ import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
-public class Task1Reducer extends Reducer<LongWritable, LongWritable, LongWritable, Text> {
+public class Task1Reducer extends Reducer<ArticleRevPair, LongWritable, LongWritable, Text> {
 
-	public void reduce(LongWritable key, Iterable<LongWritable> values, Context context)
+	public void reduce(ArticleRevPair key, Iterable<LongWritable> values, Context context)
 			throws IOException, InterruptedException {
-		
 		int count = 0;
 		String revs = "";
 		for (LongWritable value : values) {
@@ -18,7 +17,7 @@ public class Task1Reducer extends Reducer<LongWritable, LongWritable, LongWritab
 			count++;
 		}
 		revs = count + " " + revs;
-		context.write(key, new Text(revs));
+		context.write(new LongWritable(key.getArticleId()), new Text(revs));
 	}
 
 }
