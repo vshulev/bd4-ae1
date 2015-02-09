@@ -32,7 +32,6 @@ public class Task1 {
 		job.setGroupingComparatorClass(Task1GroupingComparator.class);
 		job.setSortComparatorClass(ArticleRevPairComparator.class);
 		
-		
 		FileInputFormat.addInputPath(job, new Path(args[0]));
 		FileOutputFormat.setOutputPath(job, new Path(args[1]));
 		job.submit();

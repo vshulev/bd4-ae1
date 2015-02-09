@@ -17,7 +17,7 @@ public class Task3 {
 		this.conf = conf;
 	}
 	
-	public int run(String[] args) throws Exception {	
+	public int run(String[] args) throws Exception {
 		Job job = new Job(conf, "Task3");
 		job.setJarByClass(Task3.class);
 		job.setInputFormatClass(TextInputFormat.class);
@@ -31,7 +31,6 @@ public class Task3 {
 		job.setPartitionerClass(Task3Partitioner.class);
 		job.setGroupingComparatorClass(Task3GroupingComparator.class);
 		job.setSortComparatorClass(RevDatePairComparator.class);
-		
 		
 		FileInputFormat.addInputPath(job, new Path(args[0]));
 		FileOutputFormat.setOutputPath(job, new Path(args[1]));
