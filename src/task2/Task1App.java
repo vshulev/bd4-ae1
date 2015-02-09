@@ -33,7 +33,7 @@ import com.google.common.collect.Lists;
 
 @SuppressWarnings("unused")
 public class Task1App extends Configured implements Tool {
-	
+
 	
 	/*static class Map extends org.apache.hadoop.mapreduce.Mapper<LongWritable, Text, LongWritable, LongWritable>{
 		private final static  LongWritable one = new  LongWritable(1);
@@ -130,7 +130,6 @@ public class Task1App extends Configured implements Tool {
 		FileOutputFormat.setOutputPath(jobCount, new Path(jobOneOutputPath));
 		
 		
-		//jobCount.submit();
 		
 		Job jobSort = Job.getInstance(getConf());
 		
@@ -143,7 +142,6 @@ public class Task1App extends Configured implements Tool {
 		jobSort.setOutputValueClass(Text.class);
 		jobSort.setMapperClass(SortMapper.class);
 		jobSort.setReducerClass(SortReducer.class);
-		//jobSort.setSortComparatorClass(IntComparator.class);
 		
 		jobSort.setPartitionerClass(NaturalKeyPartitioner.class);
 		jobSort.setGroupingComparatorClass(GroupingComparator.class);
@@ -153,35 +151,6 @@ public class Task1App extends Configured implements Tool {
 		jobSort.setOutputFormatClass(TextOutputFormat.class);
 		FileInputFormat.setInputPaths(jobSort, new Path(jobTwoInputPath));
 		FileOutputFormat.setOutputPath(jobSort, new Path(jobTwoOutputPath));
-		
-		
-		/*Job job = new Job(getConf());
-		job.setJobName("Task1");
-		job.setJarByClass(Task1App.class);
-		job.setMapperClass(Map.class);
-		
-		job.setMapOutputKeyClass( LongWritable.class);
-		job.setMapOutputValueClass( LongWritable.class);
-		
-		//job.setCombinerClass(Reduce.class);
-		job.setReducerClass(MyReducer.class);
-		job.setInputFormatClass(TextInputFormat.class);
-		
-		job.setOutputKeyClass(Text.class);
-		job.setOutputValueClass(Text.class);
-		job.setOutputFormatClass(TextOutputFormat.class);
-		
-		//job.setSortComparatorClass(IntComparator.class);
-		
-		FileInputFormat.setInputPaths(job, new Path(args[0]));
-		FileOutputFormat.setOutputPath(job, new Path(args[1]));
-		
-		
-		job.submit();
-		return (job.waitForCompletion(true) ? 0 : 1);*/
-		
-		//jobSort.submit();
-		//return (jobSort.waitForCompletion(true) ? 0 : 1);
 		
 		
 		List<Job> jobs = Lists.newArrayList(jobCount, jobSort);
@@ -202,6 +171,10 @@ public class Task1App extends Configured implements Tool {
 	
 	public static void main(String[] args) throws Exception{
 		Configuration conf = new Configuration();
+		
+		conf.set("startdate", args[2]);
+		conf.set("enddate", args[3]);
+		conf.setInt("k", Integer.parseInt(args[4]));
 		
 		conf.addResource(new Path("file:///users/level4/1006198k/bd4-hadoop/conf/core-site.xml"));
 		//conf.addResource("file:///users/level4/1006198k/bd4-hadoop/conf/core-site.xml");
