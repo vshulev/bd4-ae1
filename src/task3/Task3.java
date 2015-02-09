@@ -40,6 +40,8 @@ public class Task3 {
 
 	public static void main(String[] args) throws Exception {
 		Configuration conf = new Configuration();
+		
+		conf.set("date", args[2]);
 		//conf.addResource(new Path("/users/level4/1103834s/Desktop/bd4-hadoop/conf/core-site.xml"));
 		//conf.set("mapred.jar", "file:///users/level4/1103834s/Desktop/task1.jar");
 		
