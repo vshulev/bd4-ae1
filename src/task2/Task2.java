@@ -1,5 +1,7 @@
 package task2;
 
+import MyPartitioner;
+
 import java.nio.ByteBuffer;
 import java.util.List;
 
@@ -69,6 +71,7 @@ public class Task2 extends Configured implements MyJob {
 		jobCount.setReducerClass(CountReducer.class);
 		jobCount.setInputFormatClass(TextInputFormat.class);
 		jobCount.setOutputFormatClass(TextOutputFormat.class);
+		jobCount.setPartitionerClass(MyPartitioner.class);
 		FileInputFormat.setInputPaths(jobCount, new Path(jobOneInputPath));
 		FileOutputFormat.setOutputPath(jobCount, new Path(jobOneOutputPath));
 
@@ -84,7 +87,7 @@ public class Task2 extends Configured implements MyJob {
 		jobSort.setMapperClass(SortMapper.class);
 		jobSort.setReducerClass(SortReducer.class);
 
-		jobSort.setPartitionerClass(NaturalKeyPartitioner.class);
+		//jobSort.setPartitionerClass(NaturalKeyPartitioner.class);
 		jobSort.setGroupingComparatorClass(GroupingComparator.class);
 		jobSort.setSortComparatorClass(ArtCountPairComparator.class);
 
