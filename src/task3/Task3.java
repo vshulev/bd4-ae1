@@ -31,8 +31,8 @@ public class Task3 extends Configured implements Tool {
 		job.setGroupingComparatorClass(Task3GroupingComparator.class);
 		job.setSortComparatorClass(RevDatePairComparator.class);
 		
-		FileInputFormat.addInputPath(job, new Path(args[0]));
-		FileOutputFormat.setOutputPath(job, new Path(args[1]));
+		FileInputFormat.addInputPath(job, new Path("/user/bd4-ae1/enwiki-20080103-largersample.txt"));
+		FileOutputFormat.setOutputPath(job, new Path("team_d-task3-output"));
 		job.submit();
 		return (job.waitForCompletion(true) ? 0 : 1);
 	}

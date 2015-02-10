@@ -15,8 +15,8 @@ public class Task1 extends Configured implements Tool {
 	
 	public int run(String[] args) throws Exception {	
 		Configuration conf = getConf();
-		conf.set("startdate", args[2]);
-		conf.set("enddate", args[3]);
+		conf.set("startdate", args[0]);
+		conf.set("enddate", args[1]);
 		
 		Job job = new Job(conf, "Task1");
 		job.setJarByClass(Task1.class);
@@ -33,8 +33,8 @@ public class Task1 extends Configured implements Tool {
 		
 		job.setNumReduceTasks(2);
 		
-		FileInputFormat.addInputPath(job, new Path(args[0]));
-		FileOutputFormat.setOutputPath(job, new Path(args[1]));
+		FileInputFormat.addInputPath(job, new Path("/user/bd4-ae1/enwiki-20080103-largersample.txt"));
+		FileOutputFormat.setOutputPath(job, new Path("team_d-task1-output"));
 		job.submit();
 		return (job.waitForCompletion(true) ? 0 : 1);
 	}

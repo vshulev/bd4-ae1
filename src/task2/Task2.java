@@ -40,15 +40,15 @@ public class Task2 extends Configured implements Tool {
 
 	public int run(String[] args) throws Exception {
 		Configuration conf = getConf();
-		conf.set("startdate", args[2]);
-		conf.set("enddate", args[3]);
-		conf.setInt("k", Integer.parseInt(args[4]));
+		conf.set("startdate", args[0]);
+		conf.set("enddate", args[1]);
+		conf.setInt("k", Integer.parseInt(args[2]));
 
 		// int numReducers = 10;
-		String jobOneInputPath = args[0];
-		String jobOneOutputPath = args[1] + "/1result";
+		String jobOneInputPath = "/user/bd4-ae1/enwiki-20080103-largersample.txt";
+		String jobOneOutputPath = "team_d-task2-output1";
 		String jobTwoInputPath = jobOneOutputPath;
-		String jobTwoOutputPath = args[1] + "/2result";
+		String jobTwoOutputPath = "team_d-task2-output2";
 
 		Job jobCount = Job.getInstance(conf);
 
