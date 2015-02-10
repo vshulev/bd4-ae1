@@ -28,6 +28,7 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
+
 import com.google.common.collect.Lists;
 
 
@@ -107,10 +108,10 @@ public class Task1App extends Configured implements Tool {
 	public int run(String[] args) throws Exception{
 		
 		//int numReducers = 10;
-		String jobOneInputPath = args[0];
-		String jobOneOutputPath = args[1] + "/1result";
+		String jobOneInputPath = "/user/bd4-ae1/enwiki-20080103-largersample.txt";
+		String jobOneOutputPath = "ae/task2/output/1result";
 		String jobTwoInputPath = jobOneOutputPath;
-		String jobTwoOutputPath = args[1] + "/2result";
+		String jobTwoOutputPath = "ae/task2/output/2result";
 		
 		Job jobCount = Job.getInstance(getConf());
 		
@@ -172,9 +173,9 @@ public class Task1App extends Configured implements Tool {
 	public static void main(String[] args) throws Exception{
 		Configuration conf = new Configuration();
 		
-		conf.set("startdate", args[2]);
-		conf.set("enddate", args[3]);
-		conf.setInt("k", Integer.parseInt(args[4]));
+		conf.set("startdate", args[0]);
+		conf.set("enddate", args[1]);
+		conf.setInt("k", Integer.parseInt(args[2]));
 		
 		conf.addResource(new Path("file:///users/level4/1006198k/bd4-hadoop/conf/core-site.xml"));
 		//conf.addResource("file:///users/level4/1006198k/bd4-hadoop/conf/core-site.xml");
