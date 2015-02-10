@@ -1,5 +1,7 @@
 package task3;
 
+import main.MyJob;
+
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.Path;
@@ -9,11 +11,14 @@ import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
-import org.apache.hadoop.util.Tool;
 
-public class Task3 extends Configured implements Tool {
+public class Task3 extends Configured implements MyJob {
+	
+	private String outputDir;
 	
 	public int run(String[] args) throws Exception {
+		outputDir = "team_d-task3-output";
+		
 		Configuration conf = getConf();
 		conf.set("date", args[0]);
 		
@@ -32,9 +37,14 @@ public class Task3 extends Configured implements Tool {
 		job.setSortComparatorClass(RevDatePairComparator.class);
 		
 		FileInputFormat.addInputPath(job, new Path("/user/bd4-ae1/enwiki-20080103-largersample.txt"));
-		FileOutputFormat.setOutputPath(job, new Path("team_d-task3-output"));
+		FileOutputFormat.setOutputPath(job, new Path(outputDir));
 		job.submit();
 		return (job.waitForCompletion(true) ? 0 : 1);
+	}
+
+	@Override
+	public String getOuputDir() {
+		return outputDir;
 	}
 	
 }

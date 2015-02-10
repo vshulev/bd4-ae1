@@ -3,6 +3,8 @@ package task2;
 import java.nio.ByteBuffer;
 import java.util.List;
 
+import main.MyJob;
+
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.Path;
@@ -15,10 +17,10 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
-import org.apache.hadoop.util.Tool;
+
 import com.google.common.collect.Lists;
 
-public class Task2 extends Configured implements Tool {
+public class Task2 extends Configured implements MyJob {
 
 	public static class IntComparator extends WritableComparator {
 		public IntComparator() {
@@ -38,6 +40,8 @@ public class Task2 extends Configured implements Tool {
 
 	}
 
+	private String outputDir;
+	
 	public int run(String[] args) throws Exception {
 		Configuration conf = getConf();
 		conf.set("startdate", args[0]);
@@ -49,6 +53,7 @@ public class Task2 extends Configured implements Tool {
 		String jobOneOutputPath = "team_d-task2-output1";
 		String jobTwoInputPath = jobOneOutputPath;
 		String jobTwoOutputPath = "team_d-task2-output2";
+		outputDir = jobTwoOutputPath;
 
 		Job jobCount = Job.getInstance(conf);
 
@@ -102,6 +107,11 @@ public class Task2 extends Configured implements Tool {
 		}
 
 		return exitstatus;
+	}
+
+	@Override
+	public String getOuputDir() {
+		return outputDir;
 	}
 
 }
