@@ -14,7 +14,7 @@ public class MyPartitioner extends Partitioner<LongWritable, IntWritable>{
 		
 		long keyid = key.get();
 		
-		return (int)Math.floor((float)((keyid + 0.0)/ ID) * numPartitions);
+		return (int)Math.floor((float)((keyid + 0.0)/ ID) * (numPartitions - 1));
 	}
 
 }

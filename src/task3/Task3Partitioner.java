@@ -1,21 +1,15 @@
 package task3;
 
-import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Partitioner;
-import org.apache.hadoop.mapreduce.lib.partition.HashPartitioner;
 
 public class Task3Partitioner extends Partitioner<RevDatePair, Text> {
 
-	HashPartitioner<LongWritable, Text> hashPartitioner;
-	
-	public Task3Partitioner() {
-		hashPartitioner = new HashPartitioner<LongWritable, Text>();
-	}
+	private static long MAX_ID = 15070781;
 	
 	@Override
 	public int getPartition(RevDatePair key, Text value, int numPartitions) {
-		return hashPartitioner.getPartition(new LongWritable(key.getArticleId()), value, numPartitions);
+		return (int) (((key.getArticleId() + 0.0) / MAX_ID) * (numPartitions - 1));
 	}
 
 }

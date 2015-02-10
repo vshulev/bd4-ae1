@@ -9,7 +9,7 @@ public class Task1Partitioner extends Partitioner<ArticleRevPair, LongWritable> 
 	
 	@Override
 	public int getPartition(ArticleRevPair key, LongWritable value, int numPartitions) {
-		return (int) (((key.getArticleId() + 0.0) / MAX_ID) * numPartitions);
+		return (int) (((key.getArticleId() + 0.0) / MAX_ID) * (numPartitions - 1));
 	}
 	
 }

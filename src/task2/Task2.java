@@ -1,8 +1,5 @@
 package task2;
 
-import MyPartitioner;
-
-import java.nio.ByteBuffer;
 import java.util.List;
 
 import main.MyJob;
@@ -13,7 +10,6 @@ import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
-import org.apache.hadoop.io.WritableComparator;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
@@ -24,24 +20,6 @@ import com.google.common.collect.Lists;
 
 public class Task2 extends Configured implements MyJob {
 
-	public static class IntComparator extends WritableComparator {
-		public IntComparator() {
-			super(IntWritable.class);
-		}
-
-		private Integer int1;
-		private Integer int2;
-
-		public int compare(byte[] raw1, int offset1, int length1, byte[] raw2,
-				int offset2, int length2) {
-			int1 = ByteBuffer.wrap(raw1, offset1, length1).getInt();
-			int2 = ByteBuffer.wrap(raw2, offset2, length2).getInt();
-
-			return int2.compareTo(int1);
-		}
-
-	}
-
 	private String outputDir;
 	
 	public int run(String[] args) throws Exception {
@@ -50,13 +28,13 @@ public class Task2 extends Configured implements MyJob {
 		conf.set("enddate", args[1]);
 		conf.setInt("k", Integer.parseInt(args[2]));
 
-		// int numReducers = 10;
 		String jobOneInputPath = "/user/bd4-ae1/enwiki-20080103-largersample.txt";
 		String jobOneOutputPath = "team_d-task2-output1";
 		String jobTwoInputPath = jobOneOutputPath;
 		String jobTwoOutputPath = "team_d-task2-output2";
 		outputDir = jobTwoOutputPath;
 
+		// first job
 		Job jobCount = Job.getInstance(conf);
 
 		jobCount.setJarByClass(Task2.class);
@@ -74,7 +52,10 @@ public class Task2 extends Configured implements MyJob {
 		jobCount.setPartitionerClass(MyPartitioner.class);
 		FileInputFormat.setInputPaths(jobCount, new Path(jobOneInputPath));
 		FileOutputFormat.setOutputPath(jobCount, new Path(jobOneOutputPath));
+		
+		jobCount.setNumReduceTasks(6);
 
+		// second job
 		Job jobSort = Job.getInstance(conf);
 
 		jobSort.setJarByClass(Task2.class);
@@ -87,7 +68,6 @@ public class Task2 extends Configured implements MyJob {
 		jobSort.setMapperClass(SortMapper.class);
 		jobSort.setReducerClass(SortReducer.class);
 
-		//jobSort.setPartitionerClass(NaturalKeyPartitioner.class);
 		jobSort.setGroupingComparatorClass(GroupingComparator.class);
 		jobSort.setSortComparatorClass(ArtCountPairComparator.class);
 

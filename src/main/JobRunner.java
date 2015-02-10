@@ -11,6 +11,7 @@ import org.apache.hadoop.util.ToolRunner;
 
 import task1.Task1;
 import task2.Task2;
+import task3.Task3;
 
 public class JobRunner {
 
@@ -28,20 +29,22 @@ public class JobRunner {
 			// output results
 			FileSystem fs = FileSystem.get(conf);
 			FileStatus[] status = fs.listStatus(new Path(task.getOuputDir()));
+			long totalBytes = 0;
 			for (int i = 0; i < status.length; i++) {
 				// skip files which are not produced by the reducers
 				if(!status[i].getPath().toString().contains("part-r-"))
 					continue;
-				
 				BufferedReader br = new BufferedReader(
 						new InputStreamReader(fs.open(status[i].getPath())));
 				String line;
 				line = br.readLine();
 				while (line != null) {
 					System.out.println(line);
+					totalBytes += (line  + "\n").getBytes().length;
 					line = br.readLine();
 				}
 			}
+			System.out.println("Number of bytes transferred " + totalBytes);
 		}
 	}
 }
