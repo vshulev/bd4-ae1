@@ -14,7 +14,7 @@ public class JobRunner {
 		conf.addResource(new Path("file:///users/level4/1103834s/Desktop/bd4-hadoop/conf/core-site.xml"));
 		conf.set("mapred.jar", "file:///users/level4/1103834s/Desktop/task1.jar");
 		
-		System.exit(ToolRunner.run(conf, new Task2(), args));
+		System.exit(ToolRunner.run(conf, new Task1(), args));
 	}
 	
 }

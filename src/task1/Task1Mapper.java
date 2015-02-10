@@ -25,7 +25,6 @@ public class Task1Mapper extends Mapper<LongWritable, Text, ArticleRevPair, Long
 				long articleId = Long.parseLong(tokenizer.nextToken());
 				long revId = Long.parseLong(tokenizer.nextToken());
 				tokenizer.nextToken();
-				tokenizer.nextToken();
 				Calendar tempdate = javax.xml.bind.DatatypeConverter.parseDateTime(tokenizer.nextToken());
 				
 				if(tempdate.after(sdate) && tempdate.before(edate) )

@@ -15,7 +15,7 @@ public class Task3 extends Configured implements Tool {
 	
 	public int run(String[] args) throws Exception {
 		Configuration conf = getConf();
-		conf.set("date", args[2]);
+		conf.set("date", args[0]);
 		
 		Job job = new Job(conf, "Task3");
 		job.setJarByClass(Task3.class);
