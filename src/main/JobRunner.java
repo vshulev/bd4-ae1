@@ -15,12 +15,14 @@ import task3.Task3;
 
 public class JobRunner {
 
+	public static final long MAX_ID = 15070781;
+	
 	public static void main(String[] args) throws Exception {
 		Configuration conf = new Configuration();
-		conf.addResource(new Path(
-				"file:///users/level4/1103834s/Desktop/bd4-hadoop/conf/core-site.xml"));
-		conf.set("mapred.jar",
-				"file:///users/level4/1103834s/Desktop/task1.jar");
+//		conf.addResource(new Path(
+//				"file:///users/level4/1103834s/Desktop/bd4-hadoop/conf/core-site.xml"));
+//		conf.set("mapred.jar",
+//				"file:///users/level4/1103834s/Desktop/task1.jar");
 
 		MyJob task = new Task1();
 		

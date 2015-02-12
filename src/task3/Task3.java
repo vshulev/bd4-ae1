@@ -36,7 +36,7 @@ public class Task3 extends Configured implements MyJob {
 		job.setGroupingComparatorClass(Task3GroupingComparator.class);
 		job.setSortComparatorClass(RevDatePairComparator.class);
 		
-		job.setNumReduceTasks(6);
+		//job.setNumReduceTasks(6);
 		
 		FileInputFormat.addInputPath(job, new Path("/user/bd4-ae1/enwiki-20080103-largersample.txt"));
 		FileOutputFormat.setOutputPath(job, new Path(outputDir));
