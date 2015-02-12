@@ -21,7 +21,7 @@ public class ArtCountPairComparator extends WritableComparator{
 		
 		if (res == 0) {
 			
-			res = p1.getRevision().compareTo(p2.getRevision());
+			res = p1.getArticle().compareTo(p2.getArticle(());
 		}
 
 		return res;

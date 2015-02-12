@@ -12,15 +12,15 @@ import org.apache.hadoop.io.WritableUtils;
 public class ArtCountPair implements WritableComparable<ArtCountPair>{
 	
 	private int count;
-	private Long revision;
+	private Long article;
 	
 	public ArtCountPair( ) {
 	}
 	
-	public ArtCountPair( Long revision, int count) {
+	public ArtCountPair( Long article, int count) {
 		super();
 		this.count = count;
-		this.revision = revision;
+		this.article = article;
 	}
 	public int getCount() {
 		return count;
@@ -28,22 +28,22 @@ public class ArtCountPair implements WritableComparable<ArtCountPair>{
 	public void setCount(int count) {
 		this.count = count;
 	}
-	public Long getRevision() {
-		return revision;
+	public Long getArticle() {
+		return article;
 	}
-	public void setRevision(Long revision) {
-		this.revision = revision;
+	public void setArticle(Long article) {
+		this.article = article;
 	}
 	@Override
 	public void readFields(DataInput in) throws IOException {
-		revision =  Long.parseLong(WritableUtils.readString(in));
+		article =  Long.parseLong(WritableUtils.readString(in));
 		count =  Integer.parseInt(WritableUtils.readString(in));
 		
 		
 	}
 	@Override
 	public void write(DataOutput out) throws IOException {
-		WritableUtils.writeString(out, String.valueOf(revision));
+		WritableUtils.writeString(out, String.valueOf(article));
 		WritableUtils.writeString(out, String.valueOf(count));
 		
 	}
@@ -54,7 +54,7 @@ public class ArtCountPair implements WritableComparable<ArtCountPair>{
 		
 		res = Integer.compare(count, rc.getCount());
 		if(res == 0) {
-			res = revision.compareTo(rc.getRevision());
+			res = article.compareTo(rc.getArticle());
 		}
 		return res;
 	}

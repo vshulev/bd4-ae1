@@ -18,7 +18,7 @@ public class NaturalKeyPartitioner extends Partitioner<ArtCountPair,  IntWritabl
 
 	@Override
 	public int getPartition(ArtCountPair key, IntWritable value, int numPartitions) {
-		return hashPartitioner.getPartition(new LongWritable(key.getRevision()), value, numPartitions);
+		return hashPartitioner.getPartition(new LongWritable(key.getArticle()), value, numPartitions);
 	}
 
 }

@@ -14,7 +14,7 @@ public class GroupingComparator extends WritableComparator {
 	public int compare(WritableComparable w1, WritableComparable w2) {
 		ArtCountPair p1 = (ArtCountPair) w1;
 		ArtCountPair p2 = (ArtCountPair) w2;
-		return p1.getRevision().compareTo(p2.getRevision());
+		return p1.getArticle().compareTo(p2.getArticle());
 	}
 
 }
