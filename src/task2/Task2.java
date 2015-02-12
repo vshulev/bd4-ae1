@@ -53,7 +53,7 @@ public class Task2 extends Configured implements MyJob {
 		FileInputFormat.setInputPaths(jobCount, new Path(jobOneInputPath));
 		FileOutputFormat.setOutputPath(jobCount, new Path(jobOneOutputPath));
 		
-		jobCount.setNumReduceTasks(6);
+		//jobCount.setNumReduceTasks(6);
 
 		// second job
 		Job jobSort = Job.getInstance(conf);
