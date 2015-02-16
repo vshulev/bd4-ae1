@@ -35,9 +35,7 @@ public class Task1 extends Configured implements MyJob {
 		job.setGroupingComparatorClass(Task1GroupingComparator.class);
 		job.setSortComparatorClass(ArticleRevPairComparator.class);
 		
-		//job.setNumReduceTasks(6);
-		
-		FileInputFormat.addInputPath(job, new Path("/user/bd4-ae1/enwiki-20080103-largersample.txt"));
+		FileInputFormat.addInputPath(job, new Path("/user/bd4-ae1/enwiki-20080103-perftest.txt"));
 		FileOutputFormat.setOutputPath(job, new Path(outputDir));
 		job.submit();
 		return (job.waitForCompletion(true) ? 0 : 1);

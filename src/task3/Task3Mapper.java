@@ -25,7 +25,7 @@ public class Task3Mapper extends Mapper<LongWritable, Text, RevDatePair, Text> {
 				long revId = Long.parseLong(tokenizer.nextToken());
 				tokenizer.nextToken();
 				String date = tokenizer.nextToken();
-				if(javax.xml.bind.DatatypeConverter.parseDateTime(date).after(givenDate))
+				if(javax.xml.bind.DatatypeConverter.parseDateTime(date).before(givenDate))
 					context.write(new RevDatePair(articleId, date), new Text(revId + " " + date));
 			}
 		}

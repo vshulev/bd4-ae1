@@ -28,7 +28,7 @@ public class Task2 extends Configured implements MyJob {
 		conf.set("enddate", args[1]);
 		conf.setInt("k", Integer.parseInt(args[2]));
 
-		String jobOneInputPath = "/user/bd4-ae1/enwiki-20080103-largersample.txt";
+		String jobOneInputPath = "/user/bd4-ae1/enwiki-20080103-perftest.txt";
 		String jobOneOutputPath = "team_d-task2-output1";
 		String jobTwoInputPath = jobOneOutputPath;
 		String jobTwoOutputPath = "team_d-task2-output2";
@@ -52,8 +52,6 @@ public class Task2 extends Configured implements MyJob {
 		jobCount.setPartitionerClass(MyPartitioner.class);
 		FileInputFormat.setInputPaths(jobCount, new Path(jobOneInputPath));
 		FileOutputFormat.setOutputPath(jobCount, new Path(jobOneOutputPath));
-		
-		//jobCount.setNumReduceTasks(6);
 
 		// second job
 		Job jobSort = Job.getInstance(conf);

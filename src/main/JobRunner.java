@@ -19,12 +19,12 @@ public class JobRunner {
 	
 	public static void main(String[] args) throws Exception {
 		Configuration conf = new Configuration();
-//		conf.addResource(new Path(
-//				"file:///users/level4/1103834s/Desktop/bd4-hadoop/conf/core-site.xml"));
-//		conf.set("mapred.jar",
-//				"file:///users/level4/1103834s/Desktop/task1.jar");
+		conf.addResource(new Path(
+				"file:///users/level4/1103834s/Desktop/bd4-hadoop/conf/core-site.xml"));
+		conf.set("mapred.jar",
+				"file:///users/level4/1103834s/Desktop/task1.jar");
 
-		MyJob task = new Task1();
+		MyJob task = new Task3();
 		
 		// job(s) ran successfully
 		if (ToolRunner.run(conf, task, args) == 0) {
@@ -47,6 +47,7 @@ public class JobRunner {
 				}
 			}
 			System.out.println("Number of bytes transferred " + totalBytes);
+			System.out.println("***");
 		}
 	}
 }
